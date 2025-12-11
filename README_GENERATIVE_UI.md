@@ -43,7 +43,7 @@ A Turborepo-powered monorepo for building AI-driven generative UI applications w
 
 - Node.js 18+ (for frontend)
 - Python 3.10+ (for backend)
-- Poetry (Python package manager)
+- Poetry (Python package manager) **OR** pip + venv
 - Yarn 3.3+ (already configured via Yarn Berry)
 
 ### Installation
@@ -65,9 +65,21 @@ A Turborepo-powered monorepo for building AI-driven generative UI applications w
    ```
 
 4. **Setup backend (Python):**
+   
+   **Option A: Using Poetry (recommended):**
    ```bash
    cd apps/agent-server
    poetry install
+   cp .env.example .env
+   # Edit .env and add your OpenAI API key
+   ```
+   
+   **Option B: Using pip + venv:**
+   ```bash
+   cd apps/agent-server
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   pip install -r requirements.txt
    cp .env.example .env
    # Edit .env and add your OpenAI API key
    ```
@@ -94,7 +106,13 @@ yarn dev
 Backend:
 ```bash
 cd apps/agent-server
+
+# If using Poetry:
 poetry run python -m src.main
+
+# If using pip + venv:
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m src.main
 ```
 
 ### Building

@@ -14,9 +14,11 @@ Python FastAPI + AG2 (AutoGen) backend for the Generative UI system.
 ### Prerequisites
 
 - Python 3.10 or higher
-- Poetry (Python package manager)
+- Poetry (Python package manager) **OR** pip + venv
 
 ### Installation
+
+**Option A: Using Poetry (recommended):**
 
 1. Install dependencies:
    ```bash
@@ -33,7 +35,32 @@ Python FastAPI + AG2 (AutoGen) backend for the Generative UI system.
    OPENAI_API_KEY=your_actual_api_key_here
    ```
 
+**Option B: Using pip + venv:**
+
+1. Create virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Copy environment variables:
+   ```bash
+   cp .env.example .env
+   ```
+
+4. Edit `.env` and add your OpenAI API key:
+   ```bash
+   OPENAI_API_KEY=your_actual_api_key_here
+   ```
+
 ### Running the Server
+
+**Using Poetry:**
 
 Development mode with auto-reload:
 ```bash
@@ -43,6 +70,20 @@ poetry run python -m src.main
 Or using uvicorn directly:
 ```bash
 poetry run uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+**Using pip + venv:**
+
+Development mode with auto-reload:
+```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+python -m src.main
+```
+
+Or using uvicorn directly:
+```bash
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+uvicorn src.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The server will be available at:
