@@ -14,3 +14,32 @@
 /.eslintcache
 /.tsbuildinfo
 /yarn-error.log
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*.so
+**/.Python
+**/build/
+**/dist/
+**/*.egg-info/
+**/.pytest_cache/
+**/.coverage
+**/htmlcov/
+**/.mypy_cache/
+**/.venv/
+**/venv/
+**/env/
+**/ENV/
+
+# Environment files
+**/.env
+**/.env.local
+**/.env*.local
+
+# Next.js
+**/.next/
+**/out/
+
+# Turbo
+**/.turbo
