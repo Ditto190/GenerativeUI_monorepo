@@ -1,7 +1,6 @@
 import { CopilotKit } from "@copilotkit/react-core";
 import { CopilotPopup } from "@copilotkit/react-ui";
 import "@copilotkit/react-ui/styles.css";
-import GenerativeCanvas from "@/components/GenerativeCanvas";
 import "./globals.css";
 
 export const metadata = {
