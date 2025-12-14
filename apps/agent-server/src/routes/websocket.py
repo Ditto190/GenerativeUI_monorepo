@@ -2,18 +2,14 @@
 WebSocket route for real-time agent communication
 """
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-from typing import Dict, Set
+from typing import Set
 import json
-import asyncio
 from datetime import datetime
 
 from ..agents.groupchat import AgentGroupChat
 from ..models.schemas import WebSocketMessage, AgentState
 
 router = APIRouter()
-
-# Store active WebSocket connections
-active_connections: Set[WebSocket] = set()
 
 # Global agent group chat instance
 agent_chat: AgentGroupChat = AgentGroupChat()

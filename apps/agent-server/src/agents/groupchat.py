@@ -3,9 +3,10 @@ AG2 (AutoGen) GroupChat implementation for the agent system.
 This module sets up the multi-agent conversation system.
 """
 import os
-from typing import List, Optional, Dict, Any
+from typing import Optional, Dict, Any
 from datetime import datetime
 import uuid
+import asyncio
 
 try:
     from autogen import AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
@@ -13,7 +14,6 @@ try:
 except ImportError:
     # AG2/AutoGen not installed - use mock implementation
     AG2_AVAILABLE = False
-    print("Warning: AG2/AutoGen not available. Using mock implementation.")
 
 from ..models.schemas import AgentAction, AgentState
 
@@ -30,7 +30,8 @@ class AgentGroupChat:
         if AG2_AVAILABLE:
             self._setup_agents()
         else:
-            print("Running in mock mode - AG2 not available")
+            import warnings
+            warnings.warn("AG2/AutoGen not available. Using mock implementation.", UserWarning)
 
     def _setup_agents(self) -> None:
         """Initialize AG2 agents and group chat"""
@@ -88,14 +89,8 @@ class AgentGroupChat:
         
         try:
             if AG2_AVAILABLE:
-                # Initiate chat with the user proxy
-                self.user_proxy.initiate_chat(
-                    self.manager,
-                    message=message,
-                )
-                
-                # Extract the last message and create an action
-                action = self._create_action_from_response()
+                # Run synchronous AutoGen calls in thread pool to avoid blocking event loop
+                action = await asyncio.to_thread(self._process_with_autogen, message)
             else:
                 # Mock response for when AG2 is not available
                 action = self._create_mock_action(message)
@@ -108,6 +103,17 @@ class AgentGroupChat:
             self.state.error = str(e)
         
         return self.state
+
+    def _process_with_autogen(self, message: str) -> AgentAction:
+        """Process message with AutoGen in synchronous context"""
+        # Initiate chat with the user proxy
+        self.user_proxy.initiate_chat(
+            self.manager,
+            message=message,
+        )
+        
+        # Extract the last message and create an action
+        return self._create_action_from_response()
 
     def _create_action_from_response(self) -> AgentAction:
         """Create an AgentAction from the group chat response"""

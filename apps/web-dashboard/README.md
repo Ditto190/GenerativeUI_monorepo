@@ -18,8 +18,8 @@ Next.js 14 + CopilotKit application for the Generative UI system.
 
 2. Set environment variables:
    ```bash
-   # .env.local
-   NEXT_PUBLIC_AGENT_SERVER_WS_URL=ws://localhost:8000/ws/agent
+   cp .env.example .env.local
+   # Edit .env.local and add your OpenAI API key
    ```
 
 3. Run the development server:
@@ -46,3 +46,4 @@ Custom hook that manages WebSocket connection to the agent server and handles st
 ## Environment Variables
 
 - `NEXT_PUBLIC_AGENT_SERVER_WS_URL`: WebSocket URL for the agent server (default: `ws://localhost:8000/ws/agent`)
+- `OPENAI_API_KEY`: OpenAI API key for CopilotKit (required for AI features)

@@ -34,7 +34,7 @@ export type AgentState = z.infer<typeof AgentStateSchema>;
 export const WebSocketMessageSchema = z.object({
   type: z.enum(['state_update', 'action', 'error', 'ping', 'pong']).describe('Message type'),
   payload: z.any().optional().describe('Message payload'),
-  timestamp: z.number().describe('Unix timestamp'),
+  timestamp: z.number().default(() => Date.now()).describe('Unix timestamp'),
 });
 
 export type WebSocketMessage = z.infer<typeof WebSocketMessageSchema>;
