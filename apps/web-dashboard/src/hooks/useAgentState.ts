@@ -88,7 +88,7 @@ export function useAgentState() {
         ws.close();
       }
     };
-  }, [connectWebSocket]);
+  }, [connectWebSocket, ws]);
 
   const sendMessage = useCallback(
     (message: WebSocketMessage) => {
