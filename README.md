@@ -1,17 +1,78 @@
-# Monorepo template
+# GenerativeUI Monorepo
 
-The monorepo template is a GitHub repository template that preconfigures common
-front end dependencies for best practices and abstracts them in an extensible
-manner.
+> **A hybrid multi-language development workspace for building Generative UI systems and multi-agent architectures**
 
-| Problem                                          | Goal                                                     |
+This monorepo combines TypeScript/React/Next.js frontends with Python backend services to create an experimental playground for AI-driven interfaces and agentic workflows. It's designed as both a **working development environment** and a **template for similar projects**.
+
+## 🎯 What is This?
+
+A **polyglot monorepo** that enables:
+
+- 🎨 **Generative UI Development** - Build AI-generated interfaces with CopilotKit, Next.js, and Material UI
+- 🤖 **Multi-Agent Systems** - Create agentic workflows using AG2 (AutoGen), FastAPI, and FastAgency
+- 🔒 **Local-First Architecture** - Privacy-focused, offline-capable development with no required cloud dependencies
+- 📦 **Template-Ready Structure** - Clear boundaries and documentation for easy adaptation to new projects
+
+### Key Principles
+
+| Challenge                                        | Solution                                                 |
 | ------------------------------------------------ | -------------------------------------------------------- |
-| **Front end engineers...**                       | **Front end engineers...**                               |
-| ... spend too much time managing configurations. | ... should spend more time writing great applications.   |
-| ... only harness a subset of best practices.     | ... have best practices available at no additional cost. |
-| ... have difficulty integrating dependencies.    | ... have dependencies integrated seamlessly.             |
+| **Developers...**                                | **This workspace...**                                    |
+| ... struggle with polyglot monorepo setup       | ... provides clear boundaries between languages          |
+| ... waste time on dependency conflicts           | ... uses isolated virtual environments per service       |
+| ... lack clear documentation for agents/AI       | ... includes AGENT.md for AI agent context              |
+| ... need reproducible environments               | ... includes automated setup scripts                     |
 
-The front end ecosystem should _just work_.
+## 🚀 Quick Start
+
+### Prerequisites
+
+- **Node.js** 18+ (for frontend)
+- **Python** 3.10+ (for backend services)
+- **Yarn** 3.3+ (installed automatically if missing)
+
+### Automated Setup
+
+**Linux/Mac:**
+```bash
+chmod +x scripts/setup-monorepo.sh
+./scripts/setup-monorepo.sh
+```
+
+**Windows (PowerShell):**
+```powershell
+.\scripts\setup-monorepo.ps1
+```
+
+**Manual Setup:**
+```bash
+# Install Node.js dependencies
+yarn install
+
+# Build shared packages
+yarn build
+
+# Setup Python services
+cd services/python-brain
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+cd ../..
+```
+
+### Running Services
+
+**Frontend (all apps):**
+```bash
+yarn dev  # Starts all frontend applications
+```
+
+**Backend (python-brain):**
+```bash
+cd services/python-brain
+source .venv/bin/activate  # Windows: .venv\Scripts\Activate.ps1
+uvicorn main:app --reload --port 8000
+```
 
 ## Features
 
@@ -51,14 +112,25 @@ desired.
 [![minzipped size](https://img.shields.io/bundlephobia/minzip/@monorepo-template/example-react-module.svg?label=minzipped%20size)](https://www.npmjs.com/package/@monorepo-template/example-react-module)
 [![version](https://img.shields.io/npm/v/@monorepo-template/example-react-module.svg?label=version)](https://www.npmjs.com/package/@monorepo-template/example-react-module)
 
-## Documentation
+## 📚 Documentation
 
-- [Getting started](https://github.com/monorepo-template/monorepo-template/blob/main/docs/GETTING_STARTED.md)
-- [Adding a React application](https://github.com/monorepo-template/monorepo-template/blob/main/docs/REACT_APPLICATION.md)
-- [Adding a React module](https://github.com/monorepo-template/monorepo-template/blob/main/docs/REACT_MODULE.md)
-- [Contributing](https://github.com/monorepo-template/monorepo-template/blob/main/docs/CONTRIBUTING.md)
-- [Debugging](https://github.com/monorepo-template/monorepo-template/blob/main/docs/DEBUGGING.md)
-- [Dependencies](https://github.com/monorepo-template/dependencies#monorepo-template-dependencies)
+### Essential Reading
+
+- **[AGENT.md](./AGENT.md)** - 🤖 **Read this FIRST** if you're an AI agent working in this workspace
+- **[ProjectOverview.md](./ProjectOverview.md)** - Vision, architecture, and conceptual design
+- **[copilot-instructions.md](./copilot-instructions.md)** - Agent-specific patterns and workflows
+
+### Technical Guides
+
+- [Getting started](./docs/GETTING_STARTED.md) - Detailed setup instructions
+- [Adding a React application](./docs/REACT_APPLICATION.md) - Create new frontend apps
+- [Adding a React module](./docs/REACT_MODULE.md) - Create reusable React libraries
+- [Contributing](./docs/CONTRIBUTING.md) - Contribution guidelines
+- [Debugging](./docs/DEBUGGING.md) - Troubleshooting common issues
+
+### Service Documentation
+
+- [python-brain Service](./services/python-brain/README.md) - FastAPI + AG2 backend service
 
 ## Packages
 

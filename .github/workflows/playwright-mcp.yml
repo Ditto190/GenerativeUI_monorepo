@@ -1,0 +1,40 @@
+name: Playwright MCP Setup
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-playwright-mcp:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Playwright MCP
+        run: |
+          npm install -g @playwright/mcp@latest
+
+      - name: Run Playwright MCP
+        run: |
+          playwright-mcp --help
+
+      - name: Save Playwright MCP session
+        run: |
+          playwright-mcp --save-session --output-dir ./mcp-session
+
+      - name: Upload MCP session artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: mcp-session
+          path: ./mcp-session
