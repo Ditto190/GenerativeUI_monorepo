@@ -14,3 +14,6 @@
 /.eslintcache
 /.tsbuildinfo
 /yarn-error.log
+
+# Python virtual env
+.venv/
