@@ -3758,6 +3758,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@monorepo/agent-generator@workspace:apps/agent-generator":
+  version: 0.0.0-use.local
+  resolution: "@monorepo/agent-generator@workspace:apps/agent-generator"
+  dependencies:
+    "@types/node": ^20.0.0
+    typescript: ^5.0.0
+    zod: ^3.22.4
+  languageName: unknown
+  linkType: soft
+
 "@napi-rs/wasm-runtime@npm:^0.2.11":
   version: 0.2.12
   resolution: "@napi-rs/wasm-runtime@npm:0.2.12"
